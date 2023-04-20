@@ -1,0 +1,4 @@
+.env
+tmp/
+.github/workflows/cd-aws.yml
+_docker-compose.yml
