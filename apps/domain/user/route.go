@@ -35,5 +35,6 @@ func (r *routeAuthImpl) RegisterUserRoutes() {
 	{
 		auth.Use(r.middle.ValidateAuth)
 		auth.GET("/me", r.user.Profile)
+		auth.DELETE("/delete", r.user.Delete)
 	}
 }

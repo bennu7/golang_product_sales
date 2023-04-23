@@ -1,7 +1,6 @@
 package middlewares
 
 import (
-	"fmt"
 	"github.com/bennu7/golang_product_sales/pkg/token"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -31,7 +30,6 @@ func (m *MiddlewareGin) ValidateAuth(ctx *gin.Context) {
 		return
 	}
 
-	fmt.Println("bearerToken => ", bearerToken)
 	validateToken, err := token.ValidateToken(bearerToken[1])
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusUnauthorized, responseValidateErr{

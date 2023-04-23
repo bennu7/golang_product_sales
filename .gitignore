@@ -2,3 +2,5 @@
 tmp/
 .github/workflows/cd-aws.yml
 _docker-compose.yml
+.idea/
+.DS_Store

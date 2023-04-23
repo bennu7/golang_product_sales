@@ -3,8 +3,10 @@ package repositories
 import (
 	"context"
 	"fmt"
+
 	"github.com/bennu7/golang_product_sales/apps/domain/auth/dto"
 	"github.com/bennu7/golang_product_sales/apps/domain/user/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -19,6 +21,9 @@ func NewAuthRepo(db *gorm.DB) AuthRepo {
 func (a *authRepo) Register(ctx context.Context, registerUser *dto.AuthRegisterDTO) error {
 	userModel := &models.User{}
 	dtoDta := registerUser.ParseToModel()
+
+	var defaultRoleIsCustomer = uuid.MustParse("20d8e1ac-9901-45f5-8edd-81b15e350d4d")
+	dtoDta.RoleId = defaultRoleIsCustomer
 
 	tx := a.db.Debug().Model(userModel).Create(dtoDta)
 	if tx.Error != nil {

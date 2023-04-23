@@ -26,9 +26,9 @@ func (m *MiddlewareGin) ValidateDto(dto interface{}) gin.HandlerFunc {
 		var validate = validator.New()
 		var dataErr []interface{}
 		err = validate.Struct(result.CustomStruct)
+		fmt.Println("ronde 2")
 		if err != nil {
 			for _, err := range err.(validator.ValidationErrors) {
-				fmt.Println("err => ", err)
 				errData := fmt.Sprintf("error %s must be %s on %s,", err.Field(), err.Type(), err.ActualTag())
 				dataErr = append(dataErr, errData)
 			}
@@ -37,6 +37,7 @@ func (m *MiddlewareGin) ValidateDto(dto interface{}) gin.HandlerFunc {
 			ctx.AbortWithStatusJSON(dataErr.StatusCode, dataErr)
 			return
 		}
+		fmt.Println("lanjutinnnnn")
 
 		ctx.Set("dto", dto)
 		ctx.Next()

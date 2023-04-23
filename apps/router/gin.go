@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/bennu7/golang_product_sales/apps/commons/middlewares"
 	"github.com/bennu7/golang_product_sales/apps/domain/auth"
+	"github.com/bennu7/golang_product_sales/apps/domain/product"
 	"github.com/bennu7/golang_product_sales/apps/domain/user"
 	"github.com/bennu7/golang_product_sales/config/database"
 	"github.com/gin-gonic/gin"
@@ -59,6 +60,9 @@ func (g *Gin) BuildRoutes() {
 
 	userRoute := user.NewRouterUser(v1, g.db, g.middle)
 	userRoute.RegisterUserRoutes()
+
+	productRoute := product.NewRouteProduct(v1, g.db, g.middle)
+	productRoute.RegisterAuthRoutes()
 }
 
 func (g *Gin) RUN() {

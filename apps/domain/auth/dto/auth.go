@@ -1,12 +1,16 @@
 package dto
 
-import "github.com/bennu7/golang_product_sales/apps/domain/user/models"
+import (
+	"github.com/bennu7/golang_product_sales/apps/domain/user/models"
+	"github.com/google/uuid"
+)
 
 type AuthRegisterDTO struct {
-	Email    string `json:"email" binding:"required" validate:"email,required"`
-	FullName string `json:"full_name" binding:"required" validate:"required"`
-	Gender   string `json:"gender" binding:"required" validate:"required"`
-	Password string `json:"password" binding:"required" validate:"required,min=6"`
+	Email    string    `json:"email" binding:"required" validate:"email,required"`
+	FullName string    `json:"full_name" binding:"required" validate:"required"`
+	Gender   string    `json:"gender" binding:"required" validate:"required"`
+	Password string    `json:"password" binding:"required" validate:"required,min=6"`
+	RoleId   uuid.UUID `json:"role_id,omitempty"`
 }
 
 func (a *AuthRegisterDTO) ParseToModel() *models.User {
@@ -15,6 +19,7 @@ func (a *AuthRegisterDTO) ParseToModel() *models.User {
 		FullName: a.FullName,
 		Gender:   a.Gender,
 		Password: a.Password,
+		RoleId:   a.RoleId,
 	}
 }
 
